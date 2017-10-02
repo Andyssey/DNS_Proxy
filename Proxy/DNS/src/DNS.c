@@ -4,7 +4,7 @@
  Author      : Andrii Polianytsia
  Version     :
  Copyright   : Free to use
- Description : Hello World in C, Ansi-style
+ Description : Simple DNS Proxy Server
  ============================================================================
  */
 
@@ -127,7 +127,7 @@ int extractDomainName(char buff[], int BlackList, int messageSize) {
     positionString = amount + 1;
     amount = amount + requestName[positionString] + 1;
     requestName[positionString - 1] = '.'; // Placing dots where they should be in actual domain name;
-    if (amount < (dnsCounter - 1)) // One extra symbol for 0/
+    if (amount < (dnsCounter - 1)) // One extra symbol for NULL
     {
       positionString = amount + 1;
       requestName[positionString] = '.';
@@ -135,7 +135,6 @@ int extractDomainName(char buff[], int BlackList, int messageSize) {
     requestName[dnsCounter] = 0;
     result = compare(requestName, BlackList);
     if (result == 0) {
-
       return 1;
     } else {
       sendToDNS(buff, messageSize);
